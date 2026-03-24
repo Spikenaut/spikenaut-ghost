@@ -11,6 +11,26 @@
 //!
 //! All trades are logged to JSONL for SNN training data and performance analysis.
 //!
+//! ## Provenance
+//!
+//! Extracted from Eagle-Lander, a private neuromorphic GPU supervisor (closed-source).
+//! The ghost trading engine ran in
+//! production for Dynex/Quai/Qubic portfolio optimization before being open-sourced
+//! as a standalone library.
+//!
+//! ## References
+//!
+//! - Kelly, J.L. (1956). A New Interpretation of Information Rate.
+//!   *Bell System Technical Journal*, 35(4), 917–926.
+//!   <https://doi.org/10.1002/j.1538-7305.1956.tb03809.x>
+//!
+//! - Thorp, E.O. (1969). Optimal Gambling Systems for Favorable Games.
+//!   *Review of the International Statistical Institute*, 37(3), 273–293.
+//!   Half-Kelly variance reduction rationale.
+//!
+//! - Alberts, B. et al. (2002). *Molecular Biology of the Cell* (4th ed.).
+//!   ATP as cellular energy currency — conceptual basis for CELLULAR_ATP metaphor.
+//!
 //! ## Usage
 //!
 //! ```rust
