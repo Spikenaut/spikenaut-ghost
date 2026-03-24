@@ -1,0 +1,24 @@
+[package]
+name = "spikenaut-ghost"
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+description = "Bio-inspired ghost trading engine: ATP cellular energy metaphors, 8% energy commitment per signal, 0.1% metabolic cost, multi-asset portfolio (7 assets), JSONL audit log"
+repository = "https://github.com/rmems/spikenaut-ghost"
+keywords = ["trading", "snn", "neuromorphic", "backtesting", "portfolio"]
+categories = ["science", "algorithms", "simulation"]
+exclude = ["docs/"]
+
+[lib]
+name = "spikenaut_ghost"
+path = "src/lib.rs"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
