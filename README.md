@@ -35,6 +35,16 @@ This branch contains the Wallet/MarketPrices refactor to dynamic asset maps.
 metabolic-ledger = { git = "https://github.com/Limen-Neural/metabolic-ledger" }
 ```
 
+Recommended for reproducibility:
+
+```toml
+# Pin to a release tag
+metabolic-ledger = { git = "https://github.com/Limen-Neural/metabolic-ledger", tag = "v0.1.0" }
+
+# Or pin to an exact commit
+metabolic-ledger = { git = "https://github.com/Limen-Neural/metabolic-ledger", rev = "<commit-sha>" }
+```
+
 ## Quick Start
 
 ```rust
