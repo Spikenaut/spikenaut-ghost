@@ -20,7 +20,7 @@ logged to JSONL for SNN training data and post-hoc analysis.
 
 ## Features
 
-- `GhostWallet` — 7-asset portfolio (BTC, ETH, SOL, DNX, QUAI, QUBIC, USDT) with weighted-average cost basis
+- `GhostWallet` — dynamic multi-asset portfolio with weighted-average cost basis per asset
 - `execute_buy` / `execute_sell` — ATP-gated order execution with metabolic cost
 - `CELLULAR_ATP = 500.0` — initial energy budget (USDT equivalent)
 - `ENERGY_COMMITMENT = 0.08` — 8% of available energy per signal
@@ -37,16 +37,20 @@ spikenaut-ghost = "0.1"
 ## Quick Start
 
 ```rust
-use spikenaut_ghost::{GhostWallet, MarketPrices, execute_buy, execute_sell};
+use spikenaut_ghost::{GhostWallet, execute_buy, execute_sell};
+use std::collections::HashMap;
 
 let mut wallet = GhostWallet::new();
-let prices = MarketPrices { dnx: 0.027, sol: 90.0, ..Default::default() };
+let prices: HashMap<String, f32> = HashMap::from([
+    ("DNX".to_string(), 0.027),
+    ("SOL".to_string(), 90.0),
+]);
 
 // SNN fires a BUY signal for DNX
-execute_buy(&mut wallet, "DNX", prices.dnx, 1, "bull signal: confidence=0.92", None);
+execute_buy(&mut wallet, "DNX", prices["DNX"], 1, "bull signal: confidence=0.92", None);
 
 println!("Portfolio: ${:.2}", wallet.portfolio_value(&prices));
-println!("DNX units: {:.2}", wallet.positions["DNX"]);
+println!("DNX units: {:.2}", wallet.balance("DNX"));
 ```
 
 ## With JSONL Audit Log
@@ -59,11 +63,11 @@ execute_buy(&mut wallet, "BTC", 65_000.0, 1, "snn_fire", Some("trades.jsonl"));
 ## Energy Model
 
 ```
-available_energy = wallet.usdt_balance
+available_energy = wallet.balance_atp
 committed        = available_energy × ENERGY_COMMITMENT   (8%)
 units            = committed / price
 cost             = committed × METABOLIC_COST             (0.1% friction)
-wallet.usdt     -= committed + cost
+wallet.balance_atp     -= committed + cost
 ```
 
 Inspired by ATP as cellular energy currency (Alberts et al. 2002) and half-Kelly
