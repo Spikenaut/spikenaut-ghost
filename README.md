@@ -28,6 +28,9 @@ logged to JSONL for SNN training data and post-hoc analysis.
 - `GhostTradeLog` — JSONL audit trail with timestamp, asset, side, price, units, reason
 - Kelly fraction auto-update after 10+ trades based on realized win rate
 
+## Review note
+This branch contains the Wallet/MarketPrices refactor to dynamic asset maps.
+
 ## Installation
 
 ```toml
