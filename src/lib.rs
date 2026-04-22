@@ -34,12 +34,15 @@
 //! ## Usage
 //!
 //! ```rust
-//! use spikenaut_ghost::{GhostWallet, MarketPrices, execute_buy};
+//! use spikenaut_ghost::{GhostWallet, execute_buy};
 //!
 //! let mut wallet = GhostWallet::new();
-//! let prices = MarketPrices { dnx: 0.027, sol: 90.0, ..Default::default() };
+//! let prices = std::collections::HashMap::from([
+//!     ("DNX".to_string(), 0.027),
+//!     ("SOL".to_string(), 90.0),
+//! ]);
 //!
-//! execute_buy(&mut wallet, "DNX", prices.dnx, 1, "bull signal", None);
+//! execute_buy(&mut wallet, "DNX", prices["DNX"], 1, "bull signal", None);
 //! println!("Portfolio: ${:.2}", wallet.portfolio_value(&prices));
 //! ```
 
